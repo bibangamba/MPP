@@ -36,6 +36,6 @@ public class Commissioned extends Employee {
       }
     }
 
-    return baseSalary + (totalOrderAmountFromLastMonth * this.commission);
+    return this.baseSalary + (totalOrderAmountFromLastMonth * this.commission);
   }
 }
