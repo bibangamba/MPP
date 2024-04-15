@@ -1,0 +1,14 @@
+Part B:
+the reason it returns False is because the "equals()" method is
+not correctly overriden from the superclass Object. It should be
+public boolean equals(Object o) instead of public boolean equals(Employee e).
+
+Part C:
+the solution here is incorrect because removeDuplicates relies on a hash map solution,
+but the Employee class does not override the hashCode from Object class. This means that
+even though 2 objects are considered equal, they have a different hash code value, which is incorrect.
+
+Part D:
+the solution changes the Employee field visited i.e. "tracker.get(e).setVisited(true);"
+a class used for a key in a hashmap or hashset should be immutable otherwise a different hashcode will be output
+after the setVisited method is called and will lead to unexpected errors.
