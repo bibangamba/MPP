@@ -46,22 +46,29 @@ public class Product {
     System.out.println("pt.C sorted by price: " + prodsC);
     System.out.println("###########\n");
 
-
     // part D
     List<Product> prodsD =
         new ArrayList<>() {
           {
             add(bike);
+            add(new Product("Bike", 339.99, 57));
             add(new Product("Tyre", 39.99, 55));
             add(new Product("Lamp", 19.99, 56));
           }
         };
-    bike.sortProdListWithLambda(prodsD, SortBy.BY_TITLE);
-    System.out.println("pt.D sorted by title: " + prodsD);
-    bike.sortProdListWithLambda(prodsD, SortBy.BY_PRICE);
-    System.out.println("pt.D sorted by title: " + prodsD);
-    System.out.println("###########\n");
+    Collections.sort(
+        prods,
+        (p1, p2) -> {
+          int titleComparison = p1.getTitle().compareTo(p2.getTitle());
+          if (titleComparison == 0) {
+            return p1.getModel() - p2.getModel();
+          } else {
+            return titleComparison;
+          }
+        });
 
+    System.out.println("pt.D sorted by title (and/or model): " + prodsD);
+    System.out.println("###########\n");
   }
 
   public void sortProdListWithLocalClass(List<Product> prods, SortBy mode) {
@@ -78,18 +85,6 @@ public class Product {
     }
 
     Collections.sort(prods, new ProductComparator());
-  }
-
-  public void sortProdListWithLambda(List<Product> prods, SortBy mode) {
-    Collections.sort(
-        prods,
-        (p1, p2) -> {
-          if (mode == SortBy.BY_TITLE) {
-            return p1.getTitle().compareTo(p2.getTitle());
-          } else {
-            return (int) (p1.getPrice() - p2.getPrice());
-          }
-        });
   }
 
   public String getTitle() {
