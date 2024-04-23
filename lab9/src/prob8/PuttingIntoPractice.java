@@ -3,6 +3,7 @@ package prob8;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PuttingIntoPractice {
   public static void main(String... args) {
@@ -41,11 +42,13 @@ public class PuttingIntoPractice {
 
     // Query 4: Return a string of all traders names sorted alphabetically.
     System.out.println("### Query4");
-    transactions.stream()
+    String traderNames = transactions.stream()
         .map(Transaction::getTrader)
         .filter(t -> t.getCity().equals("Cambridge"))
         .sorted(Comparator.comparing(Trader::getName))
-        .forEach(System.out::println);
+        .map(Trader::getName)
+        .collect(Collectors.joining(", "));
+    System.out.println(traderNames);
 
     // Query 5: Are there any trader based in Milan?
     System.out.println("### Query5");
